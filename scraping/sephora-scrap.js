@@ -156,10 +156,6 @@ const scrap = async () => {
   const urlList = await getAllUrl(browser, urls)
   const results = getDataFromUrl(browser, urlList)
 
-  // Write data in 'Output.txt' .
-  async function someFunc() {
-    await fs.writeFile('products.json', JSON.stringify(results), {encoding:'utf8', flag:'w'})
-  }
   return results
 }
 
