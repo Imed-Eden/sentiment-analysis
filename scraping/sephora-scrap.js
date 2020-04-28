@@ -119,6 +119,10 @@ const getDataFromUrl = async (browser, urls) => {
    }
  }
  browser.close()
+ // Writing the output inside a file after parsining it into JSON
+ var jsonContent = JSON.stringify(results);
+ console.log(jsonContent);
+ fs.writeFile('products.json', jsonContent)
  return results
 }
 
