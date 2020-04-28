@@ -32,4 +32,4 @@ COPY . .
 USER root
 
 CMD ["google-chrome-unstable"]
-ENTRYPOINT ["node", "server.js"]
+ENTRYPOINT ["node", "sephora-scrap.js"]
