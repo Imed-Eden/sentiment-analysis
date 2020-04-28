@@ -119,7 +119,7 @@ const getDataFromUrl = async (browser, urls) => {
    }
  }
  browser.close()
- return {results}
+ return results
 }
 
 
