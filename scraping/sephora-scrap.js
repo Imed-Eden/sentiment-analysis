@@ -1,5 +1,5 @@
 // Requiring fs module in which writeFile function is defined.
-const fs = require('fs')
+const fs = require('fs').promises;
 // Importing Node library "puppeteer"
 const puppeteer = require('puppeteer');
 
@@ -155,7 +155,9 @@ const scrap = async () => {
   const results = getDataFromUrl(browser, urlList)
 
   // Write data in 'Output.txt' .
-  fs.writeFileSync('products.json', JSON.stringify(results), {encoding:'utf8', flag:'w'})
+  async function someFunc() {
+    await fs.writeFile('products.json', JSON.stringify(results), {encoding:'utf8', flag:'w'})
+  }
   return results
 }
 
