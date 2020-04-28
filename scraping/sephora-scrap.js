@@ -148,9 +148,11 @@ const scrap = async () => {
            '--disable-setuid-sandbox'
     ]
   });
-  //urls = ["https://www.sephora.com/shop/fragrances-for-men", "https://www.sephora.com/shop/fragrances-for-women", "https://www.sephora.com/shop/fragrance-value-sets-gifts"]
+  
+  
+  urls = ["https://www.sephora.com/shop/fragrances-for-men", "https://www.sephora.com/shop/fragrances-for-women", "https://www.sephora.com/shop/fragrance-value-sets-gifts"]
 
-  urls =["https://www.sephora.com/shop/fragrance-value-sets-gifts"]
+  //urls =["https://www.sephora.com/shop/fragrance-value-sets-gifts"]
   const urlList = await getAllUrl(browser, urls)
   const results = getDataFromUrl(browser, urlList)
 
