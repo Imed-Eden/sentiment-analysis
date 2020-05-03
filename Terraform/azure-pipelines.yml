@@ -1,0 +1,96 @@
+#trigger:
+
+#  batch: true
+#  branches:
+#    include:
+#    - dev
+
+trigger: none
+
+
+stages:
+- stage: Build  
+  jobs:
+  - job: Build
+    pool:
+      vmImage: 'vs2017-win2016'
+    steps:
+
+
+      - task: CopyFiles@2
+        displayName: 'Copy Files'
+        inputs:
+          TargetFolder: '$(build.artifactstagingdirectory)/Terraform'
+          Contents: '**/*/**'
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: $(build.artifactstagingdirectory)/Terraform
+          ArtifactName: drop
+
+- stage: Deploy
+  jobs:
+  - deployment: DeployInfrastructure
+    pool:
+      vmImage: 'vs2017-win2016'
+    variables:
+      - group: vargroup
+      - name: terraformstorageaccount
+        value: terprdproject
+      - name: terraformstoragerg
+        value: terraform-rg
+    environment: 'Development Infrastructure'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          - task: AzureCLI@1
+            displayName: 'Azure CLI Create Terraform State Storage'
+            inputs:
+              azureSubscription: 'terraform-pipe'
+              scriptLocation: inlineScript
+              inlineScript: |
+                  call az group create --location westeurope --name $(terraformstoragerg)
+                  call az storage account create --name $(terraformstorageaccount) --resource-group $(terraformstoragerg) --location westeurope --sku Standard_LRS
+                  call az storage container create --name terraform-project --account-name $(terraformstorageaccount)
+          
+          #Terraform
+          - task: Terraform@2
+            displayName: 'Terraform Init'   
+            inputs:
+              TemplatePath: '$(Pipeline.Workspace)/drop'
+              Arguments: init
+              InstallTerraform: true
+              UseAzureSub: true
+              ConnectedServiceNameARM: 'terraform-pipe'
+
+          #Terraform
+          - task: Terraform@2
+            displayName: 'Terraform Validate'
+            inputs:
+              TemplatePath: '$(Pipeline.Workspace)/drop'
+              Arguments: validate
+              InstallTerraform: true
+              UseAzureSub: true
+              ConnectedServiceNameARM: 'terraform-pipe'
+
+          - task: Terraform@2
+            displayName: 'Terraform Plan'
+            inputs:
+              TemplatePath: '$(Pipeline.Workspace)/drop'
+              Arguments: plan
+              InstallTerraform: true
+              UseAzureSub: true
+              ConnectedServiceNameARM: 'terraform-pipe'
+
+          - task: Terraform@2
+            displayName: 'Terraform Apply'
+            inputs:
+              TemplatePath: '$(Pipeline.Workspace)/drop'
+              Arguments: apply -auto-approve
+              InstallTerraform: true
+              UseAzureSub: true
+              ConnectedServiceNameARM: 'terraform-pipe'
