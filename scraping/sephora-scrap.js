@@ -2,12 +2,14 @@
 const fs = require('fs').promises;
 // Importing Node library "puppeteer"
 const puppeteer = require('puppeteer');
+const { exec } = require("child_process");
+
 
 // My function getallurl allows to get all the links (href) of the products displayed in Sephora pages
 const getAllUrl = async (browser, urls) => {
   var content = [];
   var results = [];
-  // Looping over pages containing interesting products such as men's frangrance, women's frangrance and gifts etc.  
+  // Looping over pages containing interesting products such as men's frangrance, women's frangrance and gifts etc.
   for (let i = 0; i < urls.length; i++) {
     // Opening a new page to access the url
     const page = await browser.newPage()
@@ -26,7 +28,7 @@ const getAllUrl = async (browser, urls) => {
       let pages = parseFloat((document.querySelectorAll('body > div.css-o44is > div.css-138ub37 > div > div > div > div.css-1vuaplw > div > main > div.css-111ktzd > div > div.css-104c6qu > div.css-6su6fj > nav > ul'))[0].children[(document.querySelectorAll('body > div.css-o44is > div.css-138ub37 > div > div > div > div.css-1vuaplw > div > main > div.css-111ktzd > div > div.css-104c6qu > div.css-6su6fj > nav > ul'))[0].childElementCount - 2 ].innerText)
       return pages
     });
-    // Close the page after finishing getting the number of iterations  
+    // Close the page after finishing getting the number of iterations
     page.close()
     // Making sure it is closed first
     await page.close()
@@ -63,12 +65,14 @@ const getDataFromUrl = async (browser, urls) => {
    const url = urls[i];
    try {
      await page.goto(url, {timeout: 18000000}, {waitUntil: 'domcontentloaded'});
-   } catch(err) {                                                                                                                                                                console.log(err);
+   } catch(err) {
+     console.log(err);
    }
    if (page.url() == "https://www.sephora.com/search?keyword=productnotcarried") {
      continue ;
    }
    else {
+   console.log(page.url())
    await page.waitFor('body');
    await autoScroll(page);
    brand = await page.$eval('span[class="css-euydo4"]', el => el.innerText)
@@ -123,25 +127,27 @@ const getDataFromUrl = async (browser, urls) => {
  var jsonContent = JSON.stringify(results);
  console.log(jsonContent);
  fs.writeFile('products.json', jsonContent)
+ await caller();
  return results
 }
 
 
 async function autoScroll(page){
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 100;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
-
-                if(totalHeight >= scrollHeight){
-                    clearInterval(timer);                                                                                                                                                       resolve();
-                }                                                                                                                                                                       }, 100);
-        });
+  await page.evaluate(async () => {
+    await new Promise((resolve, reject) => {
+      var totalHeight = 0;
+      var distance = 100;
+      var timer = setInterval(() => {
+        var scrollHeight = document.body.scrollHeight;
+        window.scrollBy(0, distance);
+        totalHeight += distance;
+        if(totalHeight >= scrollHeight){
+          clearInterval(timer);
+          resolve();
+        }
+      }, 100);
     });
+  });
 }
 
 const scrap = async () => {
@@ -153,15 +159,28 @@ const scrap = async () => {
     ]
   });
   
-  
-  urls = ["https://www.sephora.com/shop/fragrances-for-men", "https://www.sephora.com/shop/fragrances-for-women", "https://www.sephora.com/shop/fragrance-value-sets-gifts"]
+  //urls = ["https://www.sephora.com/shop/fragrances-for-men", "https://www.sephora.com/shop/fragrances-for-women", "https://www.sephora.com/shop/fragrance-value-sets-gifts"]
 
-  //urls =["https://www.sephora.com/shop/fragrance-value-sets-gifts"]
+  urls =["https://www.sephora.com/shop/fragrance-value-sets-gifts"]
   const urlList = await getAllUrl(browser, urls)
   const results = getDataFromUrl(browser, urlList)
-
   return results
 }
+
+async function caller () {
+  exec('./transferStorageScript.sh', (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+  });
+}
+
 
 // 5 - Appel la fonction `scrap()`, affichage les résulats et catch les erreurs
 scrap()
