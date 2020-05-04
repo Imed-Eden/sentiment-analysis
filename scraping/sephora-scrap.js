@@ -85,10 +85,7 @@ const getDataFromUrl = async (browser, urls) => {
    } else {
      number_likes = (parseFloat(number_likes))
    }
-   await page.evaluate(() => {
-     while(document.querySelectorAll('button[class="css-frqcui "]').length == 1)
-       {document.querySelectorAll('button[class="css-frqcui "]')[0].click()}
-   });
+   await scrollComments(page)
    let comments = await page.evaluate(() => {
      let divs = [...document.querySelectorAll('div[data-comp="Ellipsis Box "]')];
      return divs.map((div) => div.textContent.trim());
@@ -150,6 +147,15 @@ async function autoScroll(page){
   });
 }
 
+async function scrollComments(page){
+  await page.evaluate(async () => {
+    while(document.querySelectorAll('button[class="css-frqcui "]').length == 1) {
+      document.querySelectorAll('button[class="css-frqcui "]')[0].click()
+        await new Promise(r => setTimeout(r, 5000));
+    }
+  });
+}
+
 const scrap = async () => {
   const browser = await puppeteer.launch({
     args: [
@@ -158,10 +164,10 @@ const scrap = async () => {
            '--disable-setuid-sandbox'
     ]
   });
-  
-  //urls = ["https://www.sephora.com/shop/fragrances-for-men", "https://www.sephora.com/shop/fragrances-for-women", "https://www.sephora.com/shop/fragrance-value-sets-gifts"]
 
-  urls =["https://www.sephora.com/shop/fragrance-value-sets-gifts"]
+  urls = ["https://www.sephora.com/shop/fragrances-for-men", "https://www.sephora.com/shop/fragrances-for-women", "https://www.sephora.com/shop/fragrance-value-sets-gifts"]
+
+  //urls =["https://www.sephora.com/shop/fragrance-value-sets-gifts"]
   const urlList = await getAllUrl(browser, urls)
   const results = getDataFromUrl(browser, urlList)
   return results
