@@ -34,7 +34,7 @@ def sentiment_analysis(client, documents):
     return [comment_sentiment, comment_positive, comment_neutral, comment_negative]
 
 def sephora_analysis(client, data):
-    products = []
+    products = {}
     for product in data:
 
         feedback=[]
@@ -77,18 +77,36 @@ def sephora_analysis(client, data):
                 'neutral' : neu, \
                 'negative' : neg \
                 }, \
-            "mark": product['mark'], \
+            "mark":transform_sephora_marks_to_floats(product['mark']), \
             "type": product['type'], \
             "family": product['family'], \
             "gender": product['gender'] \
-            }
-        products.append(dictionary)
+        }
+        products[product['product']] = dictionary
 
-    print(json.dumps(products, indent=4))
+    return products
 
 
+def transform_sephora_marks_to_floats(score):
+    mark = ""
+    for letter in score:
+        if (letter == " " ):
+          break
+        mark += letter
+    return (float(mark))
 
-get_data_products()
+def sort_products(products, metric):
+    if(metric=="neutral" or metric=="positive" or metric=="negative"):
+      return(sorted(products.items(),key=lambda x: x[1]['feedback'][metric],reverse=True))
+    else :
+      return(sorted(products.items(),key=lambda x: x[1][metric],reverse=True))
+
+
+#get_data_products()
 client = authenticate_client()
 data = get_comments()
 results = sephora_analysis(client, data)
+sorted_results = sort_products(results, 'positive')
+print(sorted_results)
+print("***********\n\n")
+print(json.dumps(sorted_results, indent=4))
