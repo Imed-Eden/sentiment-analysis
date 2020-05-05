@@ -34,7 +34,11 @@ def sentiment_analysis(client, documents):
     return [comment_sentiment, comment_positive, comment_neutral, comment_negative]
 
 def sephora_analysis(client, data):
-    products = {}
+    men_fragrances_products = {}
+    women_fragrances_products = {}
+    men_colognes_products = {}
+    women_colognes_products = {}
+
     for product in data:
 
         feedback=[]
@@ -82,9 +86,18 @@ def sephora_analysis(client, data):
             "family": product['family'], \
             "gender": product['gender'] \
         }
-        products[product['product']] = dictionary
 
-    return products
+        if (product['gender'] == "Men" and product['type'] == "Perfume") :
+          men_fragrances_products[product['product']] = dictionary
+        elif (product['gender'] == "Men" and product['type'] == "Cologne") :
+          men_colognes_products[product['product']] = dictionary
+        elif (product['gender'] == "Women" and product['type'] == "Perfume") :
+          women_colognes_products[product['product']] = dictionary
+        elif (product['gender'] == "Men" and product['type'] == "Fragrance") :
+          women_fragrances_products[product['product']] = dictionary
+
+    return men_fragrances_products, men_colognes_products, women_colognes_products, women_fragrances_products
+    #print(json.dumps(products, indent=4))
 
 
 def transform_sephora_marks_to_floats(score):
@@ -101,12 +114,21 @@ def sort_products(products, metric):
     else :
       return(sorted(products.items(),key=lambda x: x[1][metric],reverse=True))
 
-
 #get_data_products()
 client = authenticate_client()
 data = get_comments()
-results = sephora_analysis(client, data)
-sorted_results = sort_products(results, 'positive')
-print(sorted_results)
-print("***********\n\n")
-print(json.dumps(sorted_results, indent=4))
+perfumes_men, colognes_men, perfumes_women, colognes_women = sephora_analysis(client, data)
+
+sorted_perfumes_men = sort_products(perfumes_men, 'positive')
+sorted_perfumes_women = sort_products(perfumes_women, 'positive')
+sorted_colognes_men = sort_products(colognes_men, 'positive')
+sorted_colognes_women = sort_products(colognes_women, 'positive')
+
+print("***********\n\n men perfumes: \n")
+print(json.dumps(sorted_perfumes_men, indent=4))
+print("***********\n women perfumes: \n")
+print(json.dumps(sorted_perfumes_women, indent=4))
+print("***********\n men colognes: \n")
+print(json.dumps(sorted_colognes_men, indent=4))
+print("***********\n women colognes: \n")
+print(json.dumps(sorted_colognes_women, indent=4))
