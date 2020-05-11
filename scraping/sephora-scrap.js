@@ -151,7 +151,7 @@ async function scrollComments(page){
   await page.evaluate(async () => {
     while(document.querySelectorAll('button[class="css-frqcui "]').length == 1) {
       document.querySelectorAll('button[class="css-frqcui "]')[0].click()
-        await new Promise(r => setTimeout(r, 5000));
+        await new Promise(r => setTimeout(r, 1700));
     }
   });
 }
