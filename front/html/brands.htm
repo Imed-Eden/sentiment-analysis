@@ -1,0 +1,55 @@
+<title>Brands</title>
+<link rel=stylesheet type=text/css href="../css/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="../js/app.js"></script>
+<html lang="en">
+    <body>
+		<h3>Brands:</h3>
+		<div class="btn-group" style="text-align:center">
+			<button id='btn-brand1' value="Kiehls Since 1851">Kiehls</button>
+			<button id='btn-brand2' value='SK-II'>SK-II</button>
+			<button id='btn-brand3' value='Lancôme'>Lancôme</button>
+ 			<button id='btn-brand4' value='FENTY BEAUTY by Rihanna'>Fenty</button>
+			<button id='btn-brand5' value='Estée Lauder'>Estée Lauder</button>
+			<button id='btn-brand6' value='The Ordinary'>The Ordinary</button>
+			<button id='btn-brand7' value='philosophy'>Philosophy</button>
+			<button id='btn-brand8' value='Shiseido'>Shiseido</button>
+			<button id='btn-brand9' value='CLINIQUE'>Clinique</button>
+			<button id='btn-brand10' value='Benefit Cosmetics'>Benefit</button>
+			<button id='btn-brand11' value='Dr. Jart+'>Dr Jart</button>
+			<button id='btn-brand12' value='NARS'>Nars</button>
+			<button id='btn-brand13' value='LANEIGE'>Laneige</button>
+			<button id='btn-brand14' value='Urban Decay'>Urban Decay</button>
+			<button id='btn-brand15' value='Bobbi Brown'>Bobbi Brown</button>
+			<button id='btn-brand16' value='CHANEL'>Chanel</button>
+			<button id='btn-brand17' value='Yves Saint Laurent'>Yves Saint Laurent</button>
+
+        </div>
+        <br>
+		<h3>Select a metric:</h3>
+		<div class="btn-group2" style="text-align:center">
+			<button id='btn2-1' value='price'>Price</button>
+			<button id='btn2-2' value='mark'>Mark</button>
+			<button id='btn2-3' value='likes'>Likes</button>
+			<button id='btn2-4' value='positivity'>Positivity</button>
+		</div>
+		<br>
+		<h3>Add another metric?:</h3>
+		<div class="btn-group2" style="text-align:center">
+			<button id='btn2-1' value='price'>Price</button>
+			<button id='btn2-2' value='mark'>Mark</button>
+			<button id='btn2-3' value='likes'>Likes</button>
+			<button id='btn2-4' value='positivity'>Positivity</button>
+			<button id='btn2-4' value='positivity'>No</button>
+		</div>
+		<br>
+		<div class="btn-submit" style="text-align:center">
+			<form action="/results" method="post">
+				<input type = "hidden" id='filter1' name="skintype" value='%'>
+				<input type = "hidden" id='filter2', name="skintone" value='%'>
+				<input type = "hidden" name="pagename" value="Skincare">
+				<button id='btn-submit' type="submit")'>Submit</button>
+			</form>
+		</div>
+	</body>
+</html>
