@@ -200,8 +200,8 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
         });
-    
-    
+
+
         $('#btn2-4').click(function () {
             $('#btn2-1').removeClass('highlight');
             $('#btn2-2').removeClass('highlight');
@@ -216,7 +216,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
         });
-    
+
         $('#btn2-5').click(function () {
             $('#btn2-1').removeClass('highlight');
             $('#btn2-2').removeClass('highlight');
@@ -231,7 +231,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
         });
-    
+
         $('#btn2-6').click(function () {
             $('#btn2-1').removeClass('highlight');
             $('#btn2-2').removeClass('highlight');
@@ -246,7 +246,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
         });
-    
+
         $('#btn2-7').click(function () {
             $('#btn2-1').removeClass('highlight');
             $('#btn2-2').removeClass('highlight');
@@ -261,7 +261,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
         });
-    
+
         $('#btn2-8').click(function () {
             $('#btn2-1').removeClass('highlight');
             $('#btn2-2').removeClass('highlight');
@@ -276,7 +276,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
         });
-    
+
         $('#btn2-9').click(function () {
             $('#btn2-1').removeClass('highlight');
             $('#btn2-2').removeClass('highlight');
@@ -291,7 +291,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
         });
-    
+
         $('#btn2-10').click(function () {
             $('#btn2-1').removeClass('highlight');
             $('#btn2-2').removeClass('highlight');
@@ -306,9 +306,9 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
         });
-    
+
     // this is where button group 3 go
-    
+
         $('#btn3-1').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -323,7 +323,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
+
         $('#btn3-2').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -338,7 +338,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
+
         $('#btn3-3').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -353,7 +353,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
+
         $('#btn3-4').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -368,7 +368,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
+
         $('#btn3-5').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -383,7 +383,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
+
         $('#btn3-6').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -398,7 +398,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
+
         $('#btn3-7').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -413,7 +413,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
+
         $('#btn3-8').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -428,7 +428,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
+
         $('#btn3-9').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -443,7 +443,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
+
         $('#btn3-10').click(function () {
             $('#btn3-1').removeClass('highlight');
             $('#btn3-2').removeClass('highlight');
@@ -458,11 +458,11 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter3').value = this.value;
         });
-    
-    
-    
+
+
+
     // this is where the by brands buttons go
-    
+
         $('#btn-brand1').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -484,7 +484,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand2').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -506,7 +506,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand3').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -528,7 +528,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand4').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -550,7 +550,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand5').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -572,7 +572,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand6').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -594,7 +594,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand7').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -616,7 +616,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand8').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -638,7 +638,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand9').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -660,7 +660,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand10').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -682,7 +682,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand11').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -704,7 +704,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand12').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -726,7 +726,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand13').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -748,7 +748,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand14').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -770,7 +770,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand15').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -792,7 +792,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand16').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -814,7 +814,7 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
         $('#btn-brand17').click(function () {
             $('#btn-brand1').removeClass('highlight');
             $('#btn-brand2').removeClass('highlight');
@@ -836,5 +836,5 @@ jQuery(function ($) {
             $(this).addClass('highlight');
             document.getElementById('filter_brand').value = this.value;
         });
-    
+
     })
