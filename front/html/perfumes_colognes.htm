@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<title>Bath and Shower</title>
+<title>Perfumes & Colognes</title>
 <link rel=stylesheet type=text/css href="../css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script src="../js/app.js"></script>
 
+
+
 <html lang="en">
 	<body>
-        <h3>Select the gender:</h3>
+		<h3>Select the type:</h3>
 		<div class="btn-group1" style="text-align:center">
-			<button id='btn1-1' value='men'>Men</button>
- 			<button id='btn1-2' value='women'>Women</button>
+			<button id='btn1-1' value='men_colognes'>Men Colognes</button>
+			<button id='btn1-2' value='women_perfumes'>Women Perfumes</button>
+			<button id='btn1-3' value='cologne_sets'>Cologne Sets</button>
+			<button id='btn1-4' value='perfume_sets'>Perfume Sets</button>
 		</div>
 		<br>
 		<h3>Select a metric:</h3>
@@ -32,8 +36,8 @@
 			<button id='btn3-6' value='No'>No</button>
 		</div>
 		<br>
-<div class="btn-submit" style="text-align:center">
-				<input type = "hidden" id='filter1' name="gender" value='%'>
+		<div class="btn-submit" style="text-align:center">
+				<input type = "hidden" id='filter1' name="type" value='%'>
 				<input type = "hidden" id='filter2', name="metric1" value='%'>
 				<input type = "hidden" id="filter3" name="metric2" value='%'>
 				<button id="btn-submit" type="submit" onclick="showDiv(document.getElementById('filter1').value, document.getElementById('filter2').value, document.getElementById('filter3').value)">Submit</button>
@@ -43,7 +47,7 @@
 					}
 					function showDiv(filter1, filter2, filter3) {
 						updateValues(filter1, filter2, filter3)
-   						document.getElementById('graphResults').style.display = "block";
+						document.getElementById('graphResults').style.display = "block";
 					}
 				</script>
 		</div>
@@ -52,16 +56,15 @@
 			<br><br><br>
 			<h3>Results:</h3>
 			<canvas id="myChart"></canvas>
-			<script src="/js/download_file_content.js"></script> 
 			<script>
-				async function drawGraph(gender, metric1, metric2) {
-
-
+				async function drawGraph(type, metric1, metric2) {
+					
 					if (metric2 == '%' || metric2 == 'No') {
-						var file_name = gender + "_bath_shower_" + metric1 + ".json"
+						var file_name = type + "_" + metric1 + ".json"
 					} else {
-						var file_name = gender + "_bath_shower_" + metric1 + "_and_" + metric2 + ".json"
+						var file_name = type + '_' + metric1 + "_and_" + metric2 + ".json"
 					}
+					console.log(file_name)
 					var graphTitle = ""
 					var x_axis_title = ""
 					var y_axis_title = ""						
@@ -74,7 +77,7 @@
 							metric1 = 'positive'
 							x_axis_title = "Percentage of positive reviews"
 							break;
-						case  'price':
+						case 'price':
 							x_axis_title = "Price"
 							break
 						case 'mark':
@@ -87,6 +90,7 @@
 						default:
 							metric1 = ""
 					}
+
 					switch (metric2) {
 						case 'likes':
 							metric2 = 'number_likes';
@@ -110,9 +114,9 @@
 							metric2 = ""
 					}
 					if (metric2 == "") {
-						graphTitle = "Bath & Shower Gel - " + x_axis_title + " and " + y_axis_title
+						graphTitle = "Perfumes & Colognes - " + x_axis_title + " and " + y_axis_title
 					} else {
-						graphTitle = "Bath & Shower Gel - " + x_axis_title
+						graphTitle = "Perfumes & Colognes - " + x_axis_title
 					}
 
 					var products_data = ""
@@ -124,11 +128,18 @@
 					          products_data = data
 					     }
 					});
+					
+
+					products_data = products_data.toString()
+					
 					products_data = products_data.replace(/'/g,'"');
 					products_data = products_data.replace(/\\xc8/g,'È');
 					products_data = products_data.replace(/\\xc9/g,'É');
 					products_data = products_data.replace(/\\xd4/g,'Ô');
+					console.log(products_data)
 					products_data = JSON.parse(products_data)
+
+
 					var colors = [
 						"#FF007F", //rose
 						"#663300", //marron
@@ -154,23 +165,7 @@
 						"#C200FB", //violet électrique
 						"#87D68D"  //granny smith
 					]
-					//if (metric2 == "'%'" || metric2 == 'No') {
 					if (metric2 == "") {
-							// var products_data = {
-							// 	'BVLGARI': {'mark': 4.128571428571428},
-							// 	'HERETIC': {'mark': 4.3545454545454545},
-							// 	'CALVIN KLEIN': {'mark': 4.36},
-							// 	'ORIGINS': {'mark': 4.36875},
-							// 	'JULIETTE HAS A GUN': {'mark': 4.3},
-							// 	'KVD VEGAN BEAUTY': {'mark': 4.304},
-							// 	'PHILOSOPHY': {'mark': 4.293333333333334},
-							// 	'MAISON LOUIS MARIE': {'mark': 4.270967741935484},
-							// 	'NEST NEW YORK': {'mark': 4.306666666666667},
-							// }
-
-
-						
-						//var productsData = download_file_content(gender, metric1, metric2)
 						var brands = []
 						var metricData = []
 
