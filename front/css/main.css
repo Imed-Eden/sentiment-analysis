@@ -122,3 +122,13 @@ button:hover{
     background: black;
     color: white !important;
 }
+
+.chartContainer{
+    text-align: center;
+}
+
+canvas {
+    width: 70% !important;
+    height: 70% !important;
+    margin: 0 auto;
+}
