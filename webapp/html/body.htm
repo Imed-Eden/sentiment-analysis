@@ -203,7 +203,18 @@
 								text: graphTitle,
 								fontSize: 24
 							   },
-							responsive: true
+							responsive: true,
+							tooltips: {
+								mode: 'point',
+								titleFontSize: 12,
+								titleFontStyle: 'bold',
+								callbacks: {
+									label: function(tooltipItem, data) {
+										var label = data.datasets[tooltipItem.datasetIndex]['label']
+										return label + ': ' + x_axis_title + ': ' + tooltipItem.xLabel + ', ' + y_axis_title + ': ' + tooltipItem.yLabel;
+									}
+								}
+							}
 						}
 					});
 				}

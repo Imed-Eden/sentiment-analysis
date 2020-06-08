@@ -142,7 +142,6 @@
 				products_data = products_data.replace(/\\xd4/g,'Ô');				
 				console.log(products_data)
 				products_data = JSON.parse(products_data)
-				console.log(products_data)
 
 				function getRandomColor() {
 					var letters = '0123456789ABCDEF';
@@ -215,7 +214,18 @@
 								text: graphTitle,
 								fontSize: 24
 							   },
-							responsive: true
+							responsive: true,
+							tooltips: {
+								mode: 'point',
+								titleFontSize: 12,
+								titleFontStyle: 'bold',
+								callbacks: {
+									label: function(tooltipItem, data) {
+										var label = data.datasets[tooltipItem.datasetIndex]['label']
+										return label + ': ' + x_axis_title + ': ' + tooltipItem.xLabel + ', ' + y_axis_title + ': ' + tooltipItem.yLabel;
+									}
+								}
+							}
 						}
 					});
 				}

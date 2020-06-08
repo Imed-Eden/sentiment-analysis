@@ -96,7 +96,6 @@ app.get('/*.json' , function(req,res) {
     file_name = file_name.replace(/\%C3\%88/g, 'È')
     file_name = file_name.replace(/\%C3\%94/g, 'Ô')
   }
-  console.log(file_name)
   get_data().then(value => {
     res.send(value);
   }).catch(err => {
