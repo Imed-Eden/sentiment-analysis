@@ -39,8 +39,6 @@ app.get('/get-brands', function(req,res) {
           console.log(x);
       }
   }
-
-
 })
 
 // This is the request performed by the "products.htm" page to get the table when a product is selected
@@ -124,5 +122,5 @@ app.get('/*.json' , function(req,res) {
 });
 
 // Our app serves on the port 3000
-app.listen(3000, function () {
+app.listen(8080, function () {
 });
