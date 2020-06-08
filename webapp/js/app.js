@@ -1,3 +1,12 @@
+function disappear(button) {
+    for (var i=1; i<=6; i++) {
+        var toAppear = document.getElementById('btn3-'+i)
+        toAppear.style.visibility = "visible"
+    }
+    var toDisappear = document.getElementById(button)
+    toDisappear.style.visibility = "hidden"
+}
+
 jQuery(function ($) {
 
     // this is where group 1 buttons go
@@ -168,6 +177,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-1');
         });
     
         $('#btn2-2').click(function () {
@@ -183,6 +193,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-2');
         });
     
     
@@ -199,6 +210,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-3');
         });
 
 
@@ -215,6 +227,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-4');
         });
 
         $('#btn2-5').click(function () {
@@ -230,6 +243,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-5');
         });
 
         $('#btn2-6').click(function () {
@@ -245,6 +259,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-6');
         });
 
         $('#btn2-7').click(function () {
@@ -260,6 +275,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-7');
         });
 
         $('#btn2-8').click(function () {
@@ -275,6 +291,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-8');
         });
 
         $('#btn2-9').click(function () {
@@ -290,6 +307,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-9');
         });
 
         $('#btn2-10').click(function () {
@@ -305,6 +323,7 @@ jQuery(function ($) {
             $('#btn2-10').removeClass('highlight');
             $(this).addClass('highlight');
             document.getElementById('filter2').value = this.value;
+            disappear('btn3-10');
         });
 
     // this is where button group 3 go

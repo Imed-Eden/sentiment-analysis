@@ -46,6 +46,8 @@
 						drawGraph(filter1, filter2, filter3)
 					}
 					function showDiv(filter1, filter2, filter3) {
+						$('#myChart').remove();
+						$('#graphResults').append('<canvas id="myChart"></canvas>');
 						updateValues(filter1, filter2, filter3)
 						document.getElementById('graphResults').style.display = "block";
 					}
@@ -100,23 +102,25 @@
 							metric2 = 'positive'
 							y_axis_title = "Percentage of positive reviews"
 							break;
-						case  'price':
+						case 'price':
 							y_axis_title = "Price"
+							metric2 = 'price'
 							break
 						case 'mark':
 							y_axis_title = "Mark"
+							metric2 = 'mark'
 							break
 						case 'popularity':
-							metric1 = 'wilson_score'
+							metric2 = 'wilson_score'
 							x_axis_title = 'Popularity'
 							break
 						default:
 							metric2 = ""
 					}
 					if (metric2 == "") {
-						graphTitle = "Perfumes & Colognes - " + x_axis_title + " and " + y_axis_title
-					} else {
 						graphTitle = "Perfumes & Colognes - " + x_axis_title
+					} else {
+						graphTitle = "Perfumes & Colognes - " + x_axis_title + " and " + y_axis_title
 					}
 
 					var products_data = ""
@@ -128,10 +132,7 @@
 					          products_data = data
 					     }
 					});
-					
-
 					products_data = products_data.toString()
-					
 					products_data = products_data.replace(/'/g,'"');
 					products_data = products_data.replace(/\\xc8/g,'È');
 					products_data = products_data.replace(/\\xc9/g,'É');
@@ -139,49 +140,30 @@
 					console.log(products_data)
 					products_data = JSON.parse(products_data)
 
-
-					var colors = [
-						"#FF007F", //rose
-						"#663300", //marron
-						"#3399FF", //bleu pâle
-						"#FFFF66", //rouge pâle
-						"#FF0000", //rouge flash
-						"#000000", //noir
-						"#006600", //vert foncé
-						"#66FF66", //bleu violet
-						"#00CCCC", //bleu roi
-						"#7026F9", //violet
-						"#75BA52", //vert clair
-						"#676966", //gris
-						"#FF9900", //orange
-						"#7A171B", //rouge bordeaux
-						"#242038", //violet foncé
-						"#CAC4CE", //gris lavande
-						"#55D6BE", //turquoise
-						"#774C60", //aubergine
-						"#697A21", //avocado
-						"#B8B42D", //vert acide
-						"#FDC5F5", //barbe à papa
-						"#C200FB", //violet électrique
-						"#87D68D"  //granny smith
-					]
+					function getRandomColor() {
+						var letters = '0123456789ABCDEF';
+						var color = '#';
+						for (var i = 0; i < 6; i++) {
+							color += letters[Math.floor(Math.random() * 16)];
+						}
+						return color;
+					}
 					if (metric2 == "") {
 						var brands = []
 						var metricData = []
-
 						for(const [key, value] of Object.entries(products_data)) {
-							backgroundColor = colors[Math.floor(Math.random() * Math.floor(colors.length))]
-							metricData.push({"label": key, "data": [value[metric1]], "backgroundColor": backgroundColor})
-							colors.splice( colors.indexOf(backgroundColor), 1 );
+							metricData.push({"label": key, "data": [value[metric1]], "backgroundColor": getRandomColor()})
 						}
 						var ctx = document.getElementById("myChart");
-						var barChart = new Chart(ctx, {
+						var config = {
 							type: 'bar',
 							data: {
 								labels: [x_axis_title],
 								datasets: metricData
-							}
-						});
+							},
+							responsive: true
+						}
+						var barChart = new Chart(ctx, config);
 					}
 					else {
 						var dot_labels = [];
@@ -194,13 +176,11 @@
 							data_value['fill'] = false;
 							data_value['showLine'] = false;
 							data_value['pointRadius'] = 5;
-							color = colors[ Math.floor(Math.random() * Math.floor(colors.length)) ]
-							data_value['backgroundColor'] = color
-							colors.splice( colors.indexOf(color), 1 );
+							data_value['backgroundColor'] = getRandomColor()
 							data_values.push(data_value)
 						}
 						var ctx = document.getElementById("myChart");
-					    var scatterChart = new Chart(ctx, {
+						var config = {
 						    type: 'scatter',
 						    data: {
 						        datasets: data_values
@@ -232,9 +212,14 @@
 				       			},
 								responsive: true
 						    }
-						});
+						}
+					    var scatterChart = new Chart(ctx, config);
 					}
 				}
 			</script>
+		</div>
+		<div id ="menu">
+			<button onclick="location.href='index.htm';">Back to menu</button>
+		</div>
 	</body>
 </html>

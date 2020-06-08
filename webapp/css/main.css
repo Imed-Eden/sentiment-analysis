@@ -23,6 +23,14 @@ h3 {
 
 }
 
+select {
+    display: block;
+    text-align-last: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    height: 1.8em;
+}
+
 button {
     font-family: "proxima-nova",sans-serif;
     font-weight: 300;
