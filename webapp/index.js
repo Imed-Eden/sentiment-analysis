@@ -39,8 +39,6 @@ app.get('/get-brands', function(req,res) {
           console.log(x);
       }
   }
-
-
 })
 
 // This is the request performed by the "products.htm" page to get the table when a product is selected
