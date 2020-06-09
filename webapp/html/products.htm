@@ -48,6 +48,7 @@
         }
         load_json_data('products')
         $(document).on('change', '#products', function() {
+            console.log($(this).val())
             var family = $(this).val().split('/')[0].replace('&', '%26')
             var type = $(this).val().split('/')[1].replace('&', '%26')
             var gender = $(this).val().split('/')[2].replace('&', '%26')

@@ -10,7 +10,7 @@
 		<div class="btn-group1" style="text-align:center">
 			<button id='btn1-1' value='body_mist'>Mist</button>
             <button id='btn1-2' value='lotions'>Lotions</button>
-            <button id='btn1-3' value='body_spray'>Spray</button>
+            <button id='btn1-3' value='body_sprays'>Spray</button>
 		</div>
 		<br>
 		<h3>Select a metric:</h3>
@@ -75,9 +75,11 @@
 						x_axis_title = "Percentage of positive reviews"
 						break;
 					case  'price':
+						metric1 = 'price'
 						x_axis_title = "Price"
 						break
 					case 'mark':
+						metric1 = 'mark'
 						x_axis_title = "Mark"
 						break
 					case 'popularity':
@@ -96,15 +98,17 @@
 						metric2 = 'positive'
 						y_axis_title = "Percentage of positive reviews"
 						break;
-					case  'price':
+					case 'price':
+						metric2 = 'price'
 						y_axis_title = "Price"
 						break
 					case 'mark':
+						metric2 = 'mark'
 						y_axis_title = "Mark"
 						break
 					case 'popularity':
-						metric1 = 'wilson_score'
-						x_axis_title = 'Popularity'
+						metric2 = 'wilson_score'
+						y_axis_title = 'Popularity'
 						break
 					default:
 						metric2 = ""
@@ -131,7 +135,6 @@
 				products_data = products_data.replace(/\\xc9/g,'É');
 				products_data = products_data.replace(/\\xd4/g,'Ô');				
 				products_data = JSON.parse(products_data)
-
 
 				function getRandomColor() {
 					var letters = '0123456789ABCDEF';
