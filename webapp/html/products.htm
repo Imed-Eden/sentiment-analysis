@@ -11,7 +11,6 @@
 <html lang="en">
     <body>
         <h3>Select the product:</h3>
-        <!-- <div class="product_selector" style="width:600px;"> -->
         <div class="product_selector" align="center">
             <select name="products" id="products">
                 <option value="">Select product</option>
@@ -32,7 +31,7 @@
     $.ajax({
         async: false,
         type: 'GET',
-        url: "/get-brands",
+        url: "/get-chanel",
         success: function(data) {
             products_list = data
         }
@@ -52,7 +51,17 @@
             var family = $(this).val().split('/')[0].replace('&', '%26')
             var type = $(this).val().split('/')[1].replace('&', '%26')
             var gender = $(this).val().split('/')[2].replace('&', '%26')
-            var queryString = "*&$count=true&$top=1000&$filter=family eq '"+family+"' and gender eq '"+gender+"' and type eq '"+type+"'"
+            console.log(gender)
+            if (gender.includes("%26")) {
+                var queryString = gender+"&$count=true&$top=1000&$filter=family eq '"+family+"' and type eq '"+type+"'"
+            }
+            else if (type.includes("%26")){
+                var queryString = type+"&$count=true&$top=1000&$filter=family eq '"+family+"' and gender eq '"+gender+"'"
+            }
+            else {
+                var queryString = "*&$count=true&$top=1000&$filter=family eq '"+family+"' and gender eq '"+gender+"' and type eq '"+type+"'"
+            }
+            queryString = queryString.replace(/\%20/g, ' ')
             console.log(queryString)
             products_data = ""
             $.ajax({
@@ -63,6 +72,7 @@
                     products_data = data
                 }
             });
+            console.log(products_data)
             var tabledata = products_data["value"]
             var table = new Tabulator("#products_table", {
                 data:tabledata,
@@ -92,4 +102,5 @@
         })
     })
 </script>
+
 

@@ -6,18 +6,36 @@
 <html lang="en">
     <body>
 		<h3>Brands:</h3>
-		<div class="btn-group1" style="text-align:center">
-			<button id='btn1-1' value="GUCCI">Gucci</button>
-			<button id='btn1-2' value='SKYLAR'>Skylar</button>
-			<button id='btn1-3' value='LANCÔME'>Lancôme</button>
- 			<button id='btn1-4' value='GIVENCHY'>Givenchy</button>
-			<button id='btn1-5' value='HUDA BEAUTY'>Huda Beauty</button>
-			<button id='btn1-6' value='HERMÈS'>Hermès</button>
-			<button id='btn1-7' value='CHANEL'>Chanel</button>
-			<button id='btn1-8' value='YVES SAINT LAURENT'>Yves Saint Laurent</button>
-
+        <div class="brand_selector" align="center">
+            <select value="brand" id="brands_filter">
+                <option value="">Select product</option>
+            </select>
+            <br>
+            <p></p>
+            <br>
+            <script>
+                brands_list = ""
+                $.ajax({
+                    async: false,
+                    type: 'GET',
+                    url: "/get-brands",
+                    success: function(data) {
+                        brands_list = data
+                    }
+                });
+                $(document).ready(function(){
+                    function load_json_data(id) {
+                        var html_code = '<option value="">Select product</option>'
+                        brands_list.forEach(element => {
+                            html_code += '<option id="'+element+'" value="'+element+'">'+element+'</option>'
+                        })
+                        $('#'+id).html(html_code);
+                    }
+                load_json_data('brands_filter')
+                })
+            </script>
         </div>
-        <br>
+        
 		<h3>Select a metric:</h3>
 		<div class="btn-group2" style="text-align:center">
 			<button id='btn2-1' value='price'>Price</button>
@@ -41,15 +59,15 @@
 			<input type = "hidden" id='filter1' name="brand" value='%'>
 			<input type = "hidden" id='filter2', name="metric1" value='%'>
 			<input type = "hidden" id="filter3" name="metric2" value='%'>
-			<button id="btn-submit" type="submit" onclick="showDiv(document.getElementById('filter1').value, document.getElementById('filter2').value, document.getElementById('filter3').value)">Submit</button>
+			<button id="btn-submit" type="submit" onclick="showDiv(document.getElementById('brands_filter').value, document.getElementById('filter2').value, document.getElementById('filter3').value)">Submit</button>
 			<script>
-				function updateValues(filter1, filter2, filter3) {
-					drawGraph(filter1, filter2, filter3)
+				function updateValues(brands_filter, filter2, filter3) {
+					drawGraph(brands_filter, filter2, filter3)
 				}
-				function showDiv(filter1, filter2, filter3) {
+				function showDiv(brands_filter, filter2, filter3) {
 					$('#myChart').remove();
 					$('#graphResults').append('<canvas id="myChart"></canvas>');
-					updateValues(filter1, filter2, filter3)
+                    updateValues(brands_filter, filter2, filter3)
 					document.getElementById('graphResults').style.display = "block";
 				}
 			</script>
@@ -60,11 +78,11 @@
 		<h3>Results:</h3>
 		<canvas id="myChart"></canvas>
 		<script>
-			async function drawGraph(brand, metric1, metric2) {
+			async function drawGraph(brands_filter, metric1, metric2) {
 				if (metric2 == '%' || metric2 == 'No') {
-					var file_name = brand + "_" + metric1 + ".json"
+					var file_name = brands_filter + "_" + metric1 + ".json"
 				} else {
-					var file_name = brand + '_' + metric1 + "_and_" + metric2 + ".json"
+					var file_name = brands_filter + '_' + metric1 + "_and_" + metric2 + ".json"
 				}
 				console.log(file_name)
 				var graphTitle = ""
@@ -119,9 +137,9 @@
 						metric2 = ""
 				}
 				if (metric2 == "") {
-					graphTitle = brand + " - " + x_axis_title				
+					graphTitle = brands_filter + " - " + x_axis_title				
 				} else {
-					graphTitle = brand + " - " + x_axis_title + " and " + y_axis_title
+					graphTitle = brands_filter + " - " + x_axis_title + " and " + y_axis_title
 				}
 
 				var products_data = ""
@@ -133,14 +151,12 @@
 						  products_data = data
 					 }
 				});
-				console.log(products_data)
 
 				products_data = products_data.toString()
 				products_data = products_data.replace(/'/g,'"');
 				products_data = products_data.replace(/\\xc8/g,'È');
 				products_data = products_data.replace(/\\xc9/g,'É');
 				products_data = products_data.replace(/\\xd4/g,'Ô');				
-				console.log(products_data)
 				products_data = JSON.parse(products_data)
 
 				function getRandomColor() {

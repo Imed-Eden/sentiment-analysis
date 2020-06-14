@@ -10,10 +10,10 @@ app.get('/',function(req,res){
 });
 // This is the request that is performed by the "products.htm" page
 // It allows us to get all the CHANEL products, in order to create the list for the select menu
-app.get('/get-brands', function(req,res) {
+app.get('/get-chanel', function(req,res) {
   const nconf = require('nconf');
   const AzureSearchClient = require('./AzureSearchClient.js');
-  const query = "*&$count=true&$filter=brand eq 'CHANEL'"
+  const query = "*&$count=true&$top=1000&$filter=brand eq 'CHANEL'"
   run(query).then(value => {
   	res.send(value);
   }).catch(err => {
@@ -39,8 +39,57 @@ app.get('/get-brands', function(req,res) {
           console.log(x);
       }
   }
+});
 
+// This is the request that is performed by the "brands.htm" page.
+// It allows us to get the name of all the brands, in order to create the list for the select menu
+app.get('/get-brands', function(req,res) {
+  const nconf = require('nconf');
+  const AzureSearchClient = require('./AzureSearchClient.js');
+  var query = "*&$count=true&$top=1000"
+  run(query).then(value => {
+    brands = []
+    value = value["value"]
+    value.forEach(element => {
+      if (brands.includes(element["brand"]) == false) {
+        brands.push(element["brand"])
+      }
+    });
+    query = "*&$count=true&$top=1000"
+    run(query).then(output => {
+      output = output["value"]
+      output.forEach(element => {
+        if (brands.includes(element["brand"]) == false) {
+          brands.push(element["brand"])
+        }
+      });
+    })
+    value = brands.sort((a, b) => a.localeCompare(b))
+    console.log(value)
+    res.send(value);
+  }).catch(err => {
+    res.send(err)
+  });
 
+  function getAzureConfiguration() {
+      const config = nconf.file({ file: 'azure_search_config.json' });
+      return config;
+  }
+  async function doQueriesAsync(client, query) {
+      const result = await client.queryAsync(query);
+      const body = await result.json();
+      return body
+  }
+  async function run(query) {
+      try {
+          const cfg = getAzureConfiguration();
+          const client = new AzureSearchClient(cfg.get("serviceName"), cfg.get("adminKey"), cfg.get("queryKey"), cfg.get("indexName"));
+          const results = await doQueriesAsync(client, query);
+          return results
+      } catch (x) {
+          console.log(x);
+      }
+  }
 })
 
 // This is the request performed by the "products.htm" page to get the table when a product is selected
@@ -52,7 +101,8 @@ app.get("/search/*", function(req,res) {
   var searchQuery = req.originalUrl.split('/')
   searchQuery = searchQuery[searchQuery.length - 1]
   run(searchQuery).then(value => {
-  	res.send(value);
+    console.log(value)
+    res.send(value);
   }).catch(err => {
     res.send(err)
   });
