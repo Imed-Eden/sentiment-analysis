@@ -141,7 +141,8 @@
 						var metricData = []
 
 						for(const [key, value] of Object.entries(products_data)) {
-							metricData.push({"label": key, "data": [value[metric1]], "backgroundColor": getRandomColor()})
+                                                        label = key.replace(/&#(\d{0,4});/g, function(fullStr, str) {return String.fromCharCode(str);}); //For special charaters
+							metricData.push({"label": label, "data": [value[metric1]], "backgroundColor": getRandomColor()})
 						}
 						config = {
 							type: 'bar',
@@ -160,7 +161,8 @@
 						var data_values = []
 						for(var key in products_data) {
 							data_value = []
-							data_value['label'] = key;
+                                                        label = label = key.replace(/&#(\d{0,4});/g, function(fullStr, str) {return String.fromCharCode(str);}); //For special charaters
+							data_value['label'] = label;
 							data_value['data'] = [{'x': products_data[key][metric1], 'y': products_data[key][metric2]}];
 							data_value['fill'] = false;
 							data_value['showLine'] = false;

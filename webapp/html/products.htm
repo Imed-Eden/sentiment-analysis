@@ -75,6 +75,7 @@
             console.log(products_data)
             var tabledata = products_data["value"]
             var table = new Tabulator("#products_table", {
+                layout: "fitDataFill",
                 data:tabledata,
                 columns:[
                     {title:"Position", formatter:"rownum"},
@@ -102,5 +103,3 @@
         })
     })
 </script>
-
-
