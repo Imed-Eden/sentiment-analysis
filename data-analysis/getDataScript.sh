@@ -1,6 +1,6 @@
 export AZURE_STORAGE_ACCOUNT=<"storage account name">
-export AZURE_STORAGE_SHARE=<"storage share files name
-export KEY=<"key of the account storage>
+export AZURE_STORAGE_SHARE=<"storage share files name">
+export KEY=<"key of the account storage">
 export SOURCE_FILE=<"source path file">
 export DESTINATION_FILE=<"destination path file">
 
